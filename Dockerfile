@@ -8,13 +8,12 @@ RUN mkdir /app
 
 WORKDIR /app
 
-RUN pip install --upgrade pip
+COPY . /code/
 
-COPY requirements.txt /app/
+RUN pip install --upgrade pip
 
 RUN pip install -r requirements.txt
 
-COPY . /code/
 
 EXPOSE 8000
 
