@@ -16,9 +16,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/django_cicd
 
       - name: Docker Push
         run: docker push ${{ secrets.DOCKER_USERNAME }}/django_cicd
-
+        
