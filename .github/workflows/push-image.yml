@@ -1,7 +1,7 @@
 name: Publish image to Docker Hub
 on:
   push:
-    branches: ['master']
+    branches: ['main']
 
 jobs:
   build:
@@ -22,4 +22,3 @@ jobs:
       - name: Docker Push
         run: docker push ${{ secrets.DOCKER_USERNAME }}/django_cicd
 
-        
