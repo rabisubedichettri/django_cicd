@@ -4,11 +4,13 @@ on:
     branches: ['main']
 
 jobs:
-  build:
+  build_os:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+  
+  docker_login:
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -16,10 +18,15 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-
+  build_docker:
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/django_cicd
+  
+  test_app:
+      - name : Testing app
+        run : python manage.py test
 
+  push_docker:
       - name: Docker Push
         run: docker push ${{ secrets.DOCKER_USERNAME }}/django_cicd
         
